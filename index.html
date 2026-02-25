@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>PH CCTV Secure Network</title>
+
 <style>
 body{
   margin:0;
@@ -39,7 +40,7 @@ body{
   position:absolute;
   width:100%;
   text-align:center;
-  top:20%;
+  top:40%;
 }
 
 button{
@@ -69,9 +70,9 @@ button{
   height:100%;
   background:black;
   color:red;
-  font-size:50px;
+  font-size:40px;
   text-align:center;
-  padding-top:20%;
+  padding-top:40%;
 }
 
 /* Matrix Camera */
@@ -87,12 +88,67 @@ button{
 }
 </style>
 </head>
+
 <body>
 
-<div id="loading"></div>
-<pre id="ascii"></
+<div id="loading">Loading PH CCTV Secure Network...</div>
 
-body{
- background:black;
- color:lime;
+<pre id="ascii"></pre>
+
+<div id="panel">
+  <button onclick="startGlitch()">Laur is watching</button>
+</div>
+
+<div id="glitch"></div>
+
+<div id="troll">
+  I can see you in your front cam
+</div>
+
+<div id="matrixCam"></div>
+
+<script>
+setTimeout(() => {
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("ascii").style.display = "block";
+  document.getElementById("panel").style.display = "block";
+  startMatrix();
+}, 2000);
+
+function randomChar() {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  return chars[Math.floor(Math.random() * chars.length)];
 }
+
+function startMatrix(){
+  const ascii = document.getElementById("ascii");
+  setInterval(() => {
+    let output = "";
+    for(let i=0;i<200;i++){
+      output += randomChar();
+      if(i%40===0) output += "\n";
+    }
+    ascii.textContent = output;
+  },100);
+}
+
+function startGlitch(){
+  document.getElementById("ascii").style.display = "none";
+  document.getElementById("panel").style.display = "none";
+  const glitch = document.getElementById("glitch");
+  glitch.style.display = "block";
+
+  let spam = setInterval(()=>{
+    glitch.textContent += randomChar();
+  },10);
+
+  setTimeout(()=>{
+    clearInterval(spam);
+    glitch.style.display="none";
+    document.getElementById("troll").style.display="block";
+  },4000);
+}
+</script>
+
+</body>
+</html>
